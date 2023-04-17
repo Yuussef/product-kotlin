@@ -1,0 +1,23 @@
+image: openjdk:8-jdk-alpine
+
+stages:
+  - build
+  - test
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+build:
+  stage: build
+  script:
+    - ./gradlew build --no-daemon
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
